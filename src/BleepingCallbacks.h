@@ -27,6 +27,9 @@ class BleepingSystemCallback : public BLECharacteristicCallbacks {
 class BleepingPropertyCallback : public BLECharacteristicCallbacks {
 
   private:
+    int lastT;
+    std::string lastK;
+    boolean continued;
     BleepingConfig* conf;
 
   public:

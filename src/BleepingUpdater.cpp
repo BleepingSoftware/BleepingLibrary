@@ -11,13 +11,14 @@ void BleepingUpdater::doUpdate() {
 void BleepingUpdater::doUpdate(const char* target) {
   ESP_LOGD(_BLib, "Updating: %s", target);
 
-  const char* netName = conf->getString(BleepingProperty::NetworkName).c_str();
-  const char* netPass = conf->getString(BleepingProperty::NetworkPassword).c_str();
+  // Load WiFi connection properties from bleeping config
+  String netName = conf->getString(BleepingUUID(BleepingProperty::NetworkName));
+  String netPass = conf->getString(BleepingUUID(BleepingProperty::NetworkPassword));
 
-  ESP_LOGI(_BLib, "Connecting [ %s :: %s ]", netName, netPass);
+  ESP_LOGI(_BLib, "Connecting to: %s", netName.c_str());
 
   WiFi.mode(WIFI_STA);
-  WiFi.begin(netName, netPass);
+  WiFi.begin(netName.c_str(), netPass.c_str());
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(25);

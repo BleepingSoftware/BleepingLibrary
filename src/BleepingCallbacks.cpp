@@ -41,11 +41,23 @@ void BleepingSystemCallback::onRead(BLECharacteristic* pCharacteristic) {
 
 BleepingPropertyCallback::BleepingPropertyCallback(BleepingConfig* conf) {
   this->conf = conf;
+
+  lastT = 0;
+  lastK = "";
+  continued = false;
 }
 
 void BleepingPropertyCallback::onWrite(BLECharacteristic *characteristic) {
   std::string key = characteristic->getUUID().toString();
   std::string val = characteristic->getValue();
+
+  continued = (key == lastK) && (millis() < lastT + 750);
+  lastT = millis();
+  lastK = key;
+
+  if (continued) {
+    val.insert(0, conf->getString(key.c_str()).c_str());
+  }
 
   conf->putString(key.c_str(), val.c_str());
   ESP_LOGD(_BLib, "Set [ %s :: %s ]", key.c_str(), val.c_str());
