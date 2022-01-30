@@ -13,19 +13,14 @@ class BleepingConfig {
 
   private:
     Preferences* conf;
-    String key(const char* uuid);
-    String key(BleepingProperty obj);
 
   public:
     BleepingConfig();
     boolean init();
     void formatAndReboot();
     int getBootCycles();
-    boolean isConfigured();
-    String getString(const char* name);
-    String getString(BleepingProperty name);
-    void putString(const char* name, const char* val);
-    void putString(BleepingProperty name, const char* val);
+    String getString(BleepingUUID uuid);
+    void putString(BleepingUUID uuid, const char* val);
 };
 
 #endif

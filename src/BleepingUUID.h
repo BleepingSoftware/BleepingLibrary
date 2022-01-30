@@ -9,6 +9,7 @@ class BleepingUUID {
   private:
     String uuidString;
   public:
+    BleepingUUID(const char* uuid);
     BleepingUUID(BleepingSystem obj, int opt = 0);
     BleepingUUID(BleepingProperty obj, int opt = 0);
     String toString();

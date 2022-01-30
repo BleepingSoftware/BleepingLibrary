@@ -35,30 +35,21 @@ int BleepingConfig::getBootCycles() {
   return getString(BleepingProperty::HardwareBoots).toInt();
 }
 
-boolean BleepingConfig::isConfigured() {
-  return conf->getBool(key(BleepingProperty::HardwareConfigured).c_str());
+String BleepingConfig::getString(BleepingUUID uuid) {
+
+  String s2 = uuid.toString().substring(21, 30);
+  const char* key = s2.c_str();
+
+  String val = conf->getString(key);
+  ESP_LOGD(_BLib, "Got [ %s :: %s ]", key, val.c_str());
+  return val;
 }
 
-String BleepingConfig::getString(const char* name) {
-  return conf->getString(key(name).c_str());
-}
+void BleepingConfig::putString(BleepingUUID uuid, const char* val) {
 
-String BleepingConfig::getString(BleepingProperty name) {
-  return conf->getString(key(name).c_str());
-}
+  String s2 = uuid.toString().substring(21, 30);
+  const char* key = s2.c_str();
 
-void BleepingConfig::putString(const char* name, const char* val) {
-  conf->putString(key(name).c_str(), val);
-}
-
-void BleepingConfig::putString(BleepingProperty name, const char* val) {
-  conf->putString(key(name).c_str(), val);
-}
-
-String BleepingConfig::key(const char* uuid) {
-  return String(uuid).substring(21, 30);
-}
-
-String BleepingConfig::key(BleepingProperty name) {
-  return key(BleepingUUID(name).toString().c_str());
+  conf->putString(key, String(val).c_str());
+  ESP_LOGD(_BLib, "Put [ %s :: %s ]", key, val);
 }

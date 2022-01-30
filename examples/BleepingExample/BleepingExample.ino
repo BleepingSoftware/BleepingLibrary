@@ -19,11 +19,8 @@ void setup() {
   int boots = bLib.init();
   ESP_LOGI(_BLib, "Boots: %d", boots);
 
-  // Get configuration
-  BleepingConfig* conf = bLib.getConfig();
-
   // Is already configured?
-  if(!conf->isConfigured()) {
+  if(!bLib.isConfigured()) {
 
     // Start setup mode, 2 minute timeout
     // Sleep if still not configured
@@ -39,13 +36,13 @@ void setup() {
   ESP_LOGI(_BLib, "Now running my Bleeping App!");
 
   // Load WiFi connection properties from bleeping config
-  const char* netName = conf->getString(BleepingProperty::NetworkName).c_str();
-  const char* netPass = conf->getString(BleepingProperty::NetworkPassword).c_str();
+  String netName = bLib.getString(BleepingProperty::NetworkName);
+  String netPass = bLib.getString(BleepingProperty::NetworkPassword);
 
-  ESP_LOGI(_BLib, "Connecting [ %s :: %s ]", netName, netPass);
+  ESP_LOGI(_BLib, "Connecting to: %s", netName.c_str());
 
   WiFi.mode(WIFI_STA);
-  WiFi.begin(netName, netPass);
+  WiFi.begin(netName.c_str(), netPass.c_str());
 }
 
 boolean connected = false;

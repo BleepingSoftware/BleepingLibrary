@@ -48,12 +48,14 @@ void BleepingPropertyCallback::onWrite(BLECharacteristic *characteristic) {
   std::string val = characteristic->getValue();
 
   conf->putString(key.c_str(), val.c_str());
+  ESP_LOGD(_BLib, "Set [ %s :: %s ]", key.c_str(), val.c_str());
 }
 
 void BleepingPropertyCallback::onRead(BLECharacteristic* characteristic) {
   std::string key = characteristic->getUUID().toString();
   std::string val = characteristic->getValue();
 
-  String keyStr = conf->getString(key.c_str());
-  characteristic->setValue(keyStr.c_str());
+  String prop = conf->getString(key.c_str());
+  characteristic->setValue(prop.c_str());
+  ESP_LOGD(_BLib, "Got [ %s :: %s ]", key.c_str(), prop.c_str());
 }
