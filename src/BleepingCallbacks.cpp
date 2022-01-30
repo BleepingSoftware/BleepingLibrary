@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingCallbacks.cpp
+*/
+
 #include "BleepingCallbacks.h"
 
 BleepingSystemCallback::BleepingSystemCallback(BleepingConfig* conf) {
@@ -8,12 +14,12 @@ void BleepingSystemCallback::onWrite(BLECharacteristic *pCharacteristic) {
   std::string key = pCharacteristic->getUUID().toString();
   std::string val = pCharacteristic->getValue();
 
-  if(key == BleepingUUID(BleepingSystem::HardwareRestart).toString().c_str()) {
+  if (key == BleepingUUID(BleepingSystem::HardwareRestart).toString().c_str()) {
     ESP.restart();
     return;
   }
 
-  if(key == BleepingUUID(BleepingSystem::HardwareReset).toString().c_str()) {
+  if (key == BleepingUUID(BleepingSystem::HardwareReset).toString().c_str()) {
     conf->formatAndReboot();
     return;
   }
@@ -23,17 +29,17 @@ void BleepingSystemCallback::onRead(BLECharacteristic* pCharacteristic) {
   std::string key = pCharacteristic->getUUID().toString();
   std::string val = pCharacteristic->getValue();
 
-  if(key == BleepingUUID(BleepingSystem::HardwareUptime).toString().c_str()) {
+  if (key == BleepingUUID(BleepingSystem::HardwareUptime).toString().c_str()) {
     pCharacteristic->setValue(String(millis()).c_str());
     return;
   }
 
-  if(key == BleepingUUID(BleepingSystem::HardwareSDK).toString().c_str()) {
+  if (key == BleepingUUID(BleepingSystem::HardwareSDK).toString().c_str()) {
     pCharacteristic->setValue(ESP.getSdkVersion());
     return;
   }
 
-  if(key == BleepingUUID(BleepingSystem::HardwareMAC).toString().c_str()) {
+  if (key == BleepingUUID(BleepingSystem::HardwareMAC).toString().c_str()) {
     pCharacteristic->setValue(WiFi.macAddress().c_str());
     return;
   }

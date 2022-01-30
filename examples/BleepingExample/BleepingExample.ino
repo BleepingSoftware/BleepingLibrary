@@ -3,8 +3,11 @@
 
    An example ESP32 sketch using the Bleep App and Library
 
-   BLE ESP Provisioning allows users to provision their device and set
-   additional configuration parmaters using an easy to implement protocol.
+   This example will start a BLE server allowing a user to configure WiFi credentials.
+   Once the device has been configured and rebooted, it will connect to WiFi and be ready to serve your application.
+
+   Read more in the Getting Started guide.
+   https://github.com/MClarkDev/BleepingLibrary/blob/master/GettingStarted.md
 */
 #include "BleepingLibrary.h"
 #include "BleepingConfig.h"
@@ -20,18 +23,18 @@ void setup() {
   ESP_LOGI(_BLib, "Boots: %d", boots);
 
   // Is already configured?
-  if(!bLib.isConfigured()) {
+  if (!bLib.isConfigured()) {
 
     // Start setup mode, 2 minute timeout
     // Sleep if still not configured
-    if(!bLib.beginSetup(120 * 1000)) {
+    if (!bLib.beginSetup(120 * 1000)) {
       esp_deep_sleep_start();
     }
   }
 
   /**
-   * Implement your code below!
-   */
+     Implement your code below!
+  */
 
   ESP_LOGI(_BLib, "Now running my Bleeping App!");
 

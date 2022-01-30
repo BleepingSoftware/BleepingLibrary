@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingServer.cpp
+*/
+
 #include "BleepingServer.h"
 
 BleepingServer::BleepingServer(BleepingConfig* conf) {
@@ -34,7 +40,7 @@ void BleepingServer::startServer() {
   createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareRestart), systemCallback);
   createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareReset), systemCallback);
   pService->start();
-  
+
   //
   // Firmware Update Service
   //

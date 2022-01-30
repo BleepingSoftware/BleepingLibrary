@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingConfig.h
+*/
+
 #ifndef BleepingConfig_H
 #define BleepingConfig_H
 

@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingServer.h
+*/
+
 #ifndef BleepingServer_H
 #define BleepingServer_H
 

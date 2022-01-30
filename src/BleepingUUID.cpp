@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingUUID.cpp
+*/
+
 #include "BleepingUUID.h"
 
 BleepingUUID::BleepingUUID(const char* uuid) {

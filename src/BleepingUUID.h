@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingUUID.h
+*/
+
 #ifndef BleepingUUID_H
 #define BleepingUUID_H
 

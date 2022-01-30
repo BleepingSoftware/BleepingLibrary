@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingLibrary.h
+*/
+
 #ifndef BleepingLibrary_H
 #define BleepingLibrary_H
 
@@ -20,6 +26,7 @@ class BleepingLibrary {
     int init();
     BleepingConfig* getConfig();
     boolean beginSetup(int timeout = 90000);
+    boolean beginSetup(int timeout, const char* name);
     String getString(BleepingProperty prop);
     BleepingServer* getServer();
     BleepingUpdater* getUpdater();

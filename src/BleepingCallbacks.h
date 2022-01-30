@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingCallbacks.h
+*/
+
 #ifndef BleepingCallbacks_H
 #define BleepingCallbacks_H
 

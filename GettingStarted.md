@@ -30,11 +30,17 @@ UUID|Parameter|Mode
 
 ## Examples
 
+The following examples will start a BLE setup server allowing a user to configure WiFi credentials and more.
+
 ### BleepingExample
+
+Once the device has been configured and rebooted, this example will connect to WiFi and then be ready to serve your application.
 
 [Example Code](examples/BleepingExample/BleepingExample.ino)
 
 ### BleepingUpdate
+
+Once the device has been configured and rebooted, this example will connect to WiFi to download and install a new firmware binary.
 
 [Example Code](examples/BleepingUpdate/BleepingUpdate.ino)
 

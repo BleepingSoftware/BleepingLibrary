@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingUpdater.cpp
+*/
+
 #include <BleepingUpdater.h>
 
 BleepingUpdater::BleepingUpdater(BleepingConfig* conf) {
@@ -29,7 +35,7 @@ void BleepingUpdater::doUpdate(const char* target) {
   switch (ret) {
     case HTTP_UPDATE_FAILED:
       ESP_LOGE(TAG, "Update failed. Error (%d): %s\n", //
-        httpUpdate.getLastError(), httpUpdate.getLastErrorString().c_str());
+               httpUpdate.getLastError(), httpUpdate.getLastErrorString().c_str());
       break;
 
     case HTTP_UPDATE_OK:

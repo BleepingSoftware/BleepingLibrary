@@ -1,3 +1,9 @@
+/**
+   BleepingLibrary!
+   MClarkDev.com, 2022
+   BleepingConfig.cpp
+*/
+
 #include "BleepingConfig.h"
 
 BleepingConfig::BleepingConfig() {
@@ -9,7 +15,7 @@ boolean BleepingConfig::init() {
   String loadS = load ? "" : "not ";
   ESP_LOGD(_BLib, "Config %sloaded.", loadS);
 
-  if(!load) {
+  if (!load) {
     return false;
   }
 
@@ -18,9 +24,9 @@ boolean BleepingConfig::init() {
 }
 
 /**
- * Used to initialize the NVS flash on the device.
- * This is the equivelent of a 'factory reset'
- */
+   Used to initialize the NVS flash on the device.
+   This is the equivelent of a 'factory reset'
+*/
 void BleepingConfig::formatAndReboot() {
 
   ESP_LOGI(_BLib, "Formatting NVS.");
