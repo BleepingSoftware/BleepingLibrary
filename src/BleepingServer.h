@@ -28,13 +28,14 @@ class BleepingServer : public BLEServerCallbacks {
     BleepingUpdater* bleepingUpdater;
     BleepingSystemCallback* systemCallback;
     BleepingPropertyCallback* propertyCallback;
-    BLECharacteristic* createCharacteristic(BLEService *svc, BleepingUUID uuid, BLECharacteristicCallbacks* callback);
 
   public:
     BleepingServer(BleepingConfig* conf);
     void startServer();
     void setDeviceName(const char* deviceName);
     BleepingUpdater* getUpdater();
+    BLEService* createService(BleepingUUID uuid, int numHandles);
+    BLECharacteristic* createCharacteristic(BLEService *svc, BleepingUUID uuid, BLECharacteristicCallbacks* callback);
 
   protected:
     void onConnect(BLEServer* pServer) override;

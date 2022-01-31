@@ -4,6 +4,22 @@ The BleepingLibrary is based around the NVS partition in flash, exposing various
 
 The configuration characteristics which can be read / written by another BLE device will allow an end-user to provision and configure their device, making connecting to WiFi network easier then ever.
 
+## Examples
+
+The following examples will start a BLE setup server allowing a user to configure WiFi credentials and more.
+
+### BleepingExample
+
+Once the device has been configured and rebooted, this example will connect to WiFi and then be ready to serve your application.
+
+[Example Sketch](examples/BleepingExample/BleepingExample.ino)
+
+### BleepingUpdate
+
+Once the device has been configured and rebooted, this example will connect to WiFi to download and install a new firmware binary.
+
+[Example Sketch](examples/BleepingUpdate/BleepingUpdate.ino)
+
 ## BLE Parameters
 
 A list of all parameters can be found in [BleepingDefinitions.h](src/BleepingDefinitions.h).
@@ -27,20 +43,3 @@ UUID|Parameter|Mode
 00000000-0000-beef-001f-320803000000|Device Name|RW
 00000000-0000-beef-001f-400203000000|Network Name|RW
 00000000-0000-beef-001f-400302000000|Network Password|W
-
-## Examples
-
-The following examples will start a BLE setup server allowing a user to configure WiFi credentials and more.
-
-### BleepingExample
-
-Once the device has been configured and rebooted, this example will connect to WiFi and then be ready to serve your application.
-
-[Example Code](examples/BleepingExample/BleepingExample.ino)
-
-### BleepingUpdate
-
-Once the device has been configured and rebooted, this example will connect to WiFi to download and install a new firmware binary.
-
-[Example Code](examples/BleepingUpdate/BleepingUpdate.ino)
-

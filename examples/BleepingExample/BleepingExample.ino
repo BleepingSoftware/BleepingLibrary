@@ -9,8 +9,8 @@
    Read more in the Getting Started guide.
    https://github.com/MClarkDev/BleepingLibrary/blob/master/GettingStarted.md
 */
+
 #include "BleepingLibrary.h"
-#include "BleepingConfig.h"
 
 #include <WiFi.h>
 

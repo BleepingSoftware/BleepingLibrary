@@ -22,56 +22,15 @@ BleepingUpdater* BleepingServer::getUpdater() {
 
 void BleepingServer::startServer() {
 
+  // Setup BLE stack
   BLEDevice::init(deviceName);
   bleServer = BLEDevice::createServer();
   bleServer->setCallbacks(this);
   BLEService *pService;
 
+  // Setup Callbacks
   systemCallback = new BleepingSystemCallback(conf);
   propertyCallback = new BleepingPropertyCallback(conf);
-
-  //
-  // System Service
-  //
-  pService = bleServer->createService(BLEUUID(BleepingUUID(BleepingSystem::HARDWARE).toString().c_str()), 12);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareMAC), systemCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareUptime), systemCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareSDK), systemCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareRestart), systemCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareReset), systemCallback);
-  pService->start();
-
-  //
-  // Firmware Update Service
-  //
-  pService = bleServer->createService(BLEUUID(BleepingUUID(BleepingSystem::UPDATE).toString().c_str()), 10);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdatePerform), bleepingUpdater);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdateCurrent), bleepingUpdater);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdateLatest), bleepingUpdater);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::UpdateTarget), propertyCallback);
-  pService->start();
-
-
-  //
-  // Config Service
-  //
-  pService = bleServer->createService(BLEUUID(BleepingUUID(BleepingProperty::HARDWARE).toString().c_str()), 8);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::HardwareName), propertyCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::HardwareConfigured), propertyCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::HardwareBoots), propertyCallback);
-  pService->start();
-
-  pService = bleServer->createService(BLEUUID(BleepingUUID(BleepingProperty::NETWORK).toString().c_str()), 6);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::NetworkName), propertyCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::NetworkPassword), propertyCallback);
-  pService->start();
-
-  pService = bleServer->createService(BLEUUID(BleepingUUID(BleepingProperty::CUSTOM).toString().c_str()), 8);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::Custom00), propertyCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::Custom01), propertyCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::Custom02), propertyCallback);
-  pService->start();
-
 
   //
   // Advertising
@@ -82,6 +41,41 @@ void BleepingServer::startServer() {
   pAdvertising->setMinPreferred(0x06);
   pAdvertising->setMinPreferred(0x12);
   BLEDevice::startAdvertising();
+
+  // System Service
+  pService = createService(BleepingUUID(BleepingSystem::HARDWARE), 12);
+  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareMAC), systemCallback);
+  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareUptime), systemCallback);
+  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareSDK), systemCallback);
+  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareRestart), systemCallback);
+  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareReset), systemCallback);
+  pService->start();
+
+  // Firmware Update Service
+  pService = createService(BleepingUUID(BleepingSystem::UPDATE), 10);
+  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdatePerform), bleepingUpdater);
+  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdateCurrent), bleepingUpdater);
+  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdateLatest), bleepingUpdater);
+  createCharacteristic(pService, BleepingUUID(BleepingProperty::UpdateTarget), propertyCallback);
+  pService->start();
+
+  // Config Service
+  pService = createService(BleepingUUID(BleepingProperty::HARDWARE), 8);
+  createCharacteristic(pService, BleepingUUID(BleepingProperty::HardwareName), propertyCallback);
+  createCharacteristic(pService, BleepingUUID(BleepingProperty::HardwareConfigured), propertyCallback);
+  createCharacteristic(pService, BleepingUUID(BleepingProperty::HardwareBoots), propertyCallback);
+  pService->start();
+
+  // Network Config Service
+  pService = createService(BleepingUUID(BleepingProperty::NETWORK), 6);
+  createCharacteristic(pService, BleepingUUID(BleepingProperty::NetworkName), propertyCallback);
+  createCharacteristic(pService, BleepingUUID(BleepingProperty::NetworkPassword), propertyCallback);
+  pService->start();
+}
+
+BLEService* BleepingServer::createService(BleepingUUID uuid, int numHandles) {
+
+  return bleServer->createService(BLEUUID(uuid.toString().c_str()), numHandles);
 }
 
 BLECharacteristic* BleepingServer::createCharacteristic(BLEService *svc, BleepingUUID uuid, BLECharacteristicCallbacks* callback) {

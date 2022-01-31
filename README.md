@@ -17,7 +17,7 @@ Read the [Getting Started](GettingStarted.md) guide for more information.
 - Custom Configuration BLE Handlers
 - OTA Firmware Updates
 
-## Provisioning Mode
+#### Provisioning Mode
 
 When in setup mode, the BLE server exposes a number of characteristics which can be used be an end-user application to provision and configure a new device.
 
@@ -27,11 +27,11 @@ When in setup mode, the BLE server exposes a number of characteristics which can
 - Reboot device
 - Factory reset device
 
-## Custom Configuration & Handlers
+#### Custom Configuration & Handlers
 
 Built to be customized to meet the needs of any application, the BleepingLibrary allows you to add your own BLE configuration keys or even add your own event handlers.
 
-## OTA Firmware Updates
+#### OTA Firmware Updates
 
 Also exposed both through the BLE update server, and to the application, is the ability to preform an OTA firmware upgrade.
 

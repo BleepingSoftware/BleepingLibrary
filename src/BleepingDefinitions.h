@@ -24,7 +24,7 @@ enum class BleepingSystem {
   UPDATE = 0x800000,
   UpdatePerform = 0x800102,
   UpdateCurrent = 0x800201,
-  UpdateLatest = 0x800201
+  UpdateLatest = 0x800301
 };
 
 enum class BleepingProperty {
@@ -35,16 +35,11 @@ enum class BleepingProperty {
   HardwareBoots = 0x32F001,
 
   UPDATE = 0x800000,
-  UpdateTarget = 0x800103,
+  UpdateTarget = 0x800403,
 
   NETWORK = 0x400000,
   NetworkName = 0x400203,
-  NetworkPassword = 0x400302,
-
-  CUSTOM = 0xA00000,
-  Custom00 = 0xA00203,
-  Custom01 = 0xA00403,
-  Custom02 = 0xA00603
+  NetworkPassword = 0x400302
 };
 
 #endif
