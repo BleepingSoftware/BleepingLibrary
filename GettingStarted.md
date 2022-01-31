@@ -10,15 +10,33 @@ The following examples will start a BLE setup server allowing a user to configur
 
 ### BleepingExample
 
-Once the device has been configured and rebooted, this example will connect to WiFi and then be ready to serve your application.
+The [BleepingExample](examples/BleepingExample/BleepingExample.ino) sketch will demonstrate:
 
-[Example Sketch](examples/BleepingExample/BleepingExample.ino)
+- Checking if a device is configured
+- Optionally launching setup mode
+- Loading WiFi credentials from config
+
+On boot the device will check if it needs to be configured and optionally launch setup mode. Once the user has configured and rebooted the device, this example will connect to WiFi and then be ready to serve your application.
 
 ### BleepingUpdate
 
-Once the device has been configured and rebooted, this example will connect to WiFi to download and install a new firmware binary.
+The [BleepingUpdate](examples/BleepingUpdate/BleepingUpdate.ino) skecth will demonstrate:
 
-[Example Sketch](examples/BleepingUpdate/BleepingUpdate.ino)
+- Checking if a device is configured
+- Optionally launching setup mode
+- Using the BleepingUpdater to download new software
+
+When booted, a configred device will download and install a new firmware image using either the target specified in setup, or the default target.
+
+### BleepingCustomImpl
+
+The [BleepingCustomImpl](examples/BleepingCustomImpl/BleepingCustomImpl.ino) sketch will demonstrate:
+
+- Manually starting the BLE setup server
+- Adding a custom service, characteristics, and callback
+- Running an application with setup mode in the background
+
+This example will add a custom service and characteristics to the setup server, with a custom callback attached. After starting the BLE setup server, control is returned to the user application.
 
 ## BLE Parameters
 
