@@ -1,10 +1,10 @@
 /**
-   BleepingCustomImpl
+   BleepingCustomBLE
 
    An example ESP32 sketch using the Bleep App and Library
 
    This example will start a BLE server allowing a user to configure WiFi credentials.
-   It uses methods exposed by the BleepingLibrary to implement custom configuration and callbacks.
+   It uses methods exposed by the BleepingLibrary to implement custom BLE callbacks.
 
    Read more in the Getting Started guide.
    https://github.com/MClarkDev/BleepingLibrary/blob/master/GettingStarted.md

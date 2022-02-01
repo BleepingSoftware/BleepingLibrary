@@ -9,6 +9,7 @@
 BleepingServer::BleepingServer(BleepingConfig* conf) {
   this->conf = conf;
   this->deviceName = _BLib;
+  this->customConfig = false;
   this->bleepingUpdater = new BleepingUpdater(conf);
 }
 
@@ -84,6 +85,18 @@ BLECharacteristic* BleepingServer::createCharacteristic(BLEService *svc, Bleepin
   BLECharacteristic *characteristic = svc->createCharacteristic(uuidStr, ((int)uuidStr[29] - '0'));
   characteristic->setCallbacks(callback);
   return characteristic;
+}
+
+void BleepingServer::startCustomPropertyService(BleepingUUID props[], int numProps) {
+
+  int handles = 2 + (numProps * 2);
+  BLEService* s = createService(BleepingUUID(BleepingProperty::CONFIG), handles);
+
+  for(int x = 0; x < numProps; x++) {
+    createCharacteristic(s, props[x], propertyCallback);
+  }
+
+  s->start();
 }
 
 void BleepingServer::onConnect(BLEServer* pServer) {

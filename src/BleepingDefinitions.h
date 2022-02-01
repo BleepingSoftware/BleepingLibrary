@@ -39,7 +39,9 @@ enum class BleepingProperty {
 
   NETWORK = 0x400000,
   NetworkName = 0x400203,
-  NetworkPassword = 0x400302
+  NetworkPassword = 0x400302,
+
+  CONFIG = 0xA00000,
 };
 
 #endif

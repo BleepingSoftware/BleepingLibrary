@@ -22,6 +22,7 @@
 class BleepingServer : public BLEServerCallbacks {
 
   private:
+    boolean customConfig;
     BleepingConfig* conf;
     const char* deviceName;
     BLEServer* bleServer;
@@ -36,6 +37,7 @@ class BleepingServer : public BLEServerCallbacks {
     BleepingUpdater* getUpdater();
     BLEService* createService(BleepingUUID uuid, int numHandles);
     BLECharacteristic* createCharacteristic(BLEService *svc, BleepingUUID uuid, BLECharacteristicCallbacks* callback);
+    void startCustomPropertyService(BleepingUUID props[], int numProps);
 
   protected:
     void onConnect(BLEServer* pServer) override;

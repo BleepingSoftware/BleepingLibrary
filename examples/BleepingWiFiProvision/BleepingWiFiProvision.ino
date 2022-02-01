@@ -1,5 +1,5 @@
 /**
-   BleepingExample
+   BleepingWiFiProvision
 
    An example ESP32 sketch using the Bleep App and Library
 
