@@ -24,8 +24,8 @@ class BleepingUpdater : public BLECharacteristicCallbacks {
 
   public:
     BleepingUpdater(BleepingConfig* conf);
-    void doUpdate();
-    void doUpdate(const char* target);
+    boolean doUpdate();
+    boolean doUpdate(const char* target);
 
   protected:
     void onWrite(BLECharacteristic *characteristic) override;
