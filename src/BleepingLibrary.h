@@ -20,6 +20,7 @@ class BleepingLibrary {
     int setupTimeout;
     BleepingConfig* conf;
     BleepingServer* server;
+    BleepingUpdater* updater;
 
   public:
     BleepingLibrary();
@@ -31,6 +32,8 @@ class BleepingLibrary {
     BleepingServer* getServer();
     BleepingUpdater* getUpdater();
     boolean isConfigured();
+    void enableUpdater(const char* app, int ver);
+    void enableUpdateManager();
 };
 
 #endif

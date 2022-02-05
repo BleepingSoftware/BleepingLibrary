@@ -17,14 +17,14 @@ enum class BleepingSystem {
   HARDWARE = 0x320000,
   HardwareMAC = 0x320101,
   HardwareUptime = 0x320401,
-  HardwareSDK = 0x324201,
   HardwareRestart = 0x32F902,
   HardwareReset = 0x32FE02,
 
-  UPDATE = 0x800000,
-  UpdatePerform = 0x800102,
-  UpdateCurrent = 0x800201,
-  UpdateLatest = 0x800301
+  FIRMWARE = 0x800000,
+  FirmwareUpdate = 0x800102,
+  FirmwareCurrent = 0x800201,
+  FirmwareLatest = 0x800301,
+  FirmwareSDK = 0x808201
 };
 
 enum class BleepingProperty {
@@ -33,9 +33,6 @@ enum class BleepingProperty {
   HardwareName = 0x320803,
   HardwareConfigured = 0x321203,
   HardwareBoots = 0x32F001,
-
-  UPDATE = 0x800000,
-  UpdateTarget = 0x800403,
 
   NETWORK = 0x400000,
   NetworkName = 0x400203,

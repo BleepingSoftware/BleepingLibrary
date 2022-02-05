@@ -1,5 +1,5 @@
 /**
-   BleepingOTAUpdate
+   BleepingFirmwareManager
 
    An example ESP32 sketch using the Bleep App and Library
 
@@ -7,7 +7,7 @@
    https://github.com/MClarkDev/BleepingLibrary/blob/master/GettingStarted.md
 */
 
-#define OTA_APPNAME "BleepingOTAUpdate"
+#define OTA_APPNAME "BleepingFirmwareManager"
 #define OTA_VERSION 1
 
 #include "BleepingLibrary.h"
@@ -20,11 +20,13 @@ void setup() {
   int boots = bLib.init();
   ESP_LOGI(_BLib, "Boots: %d", boots);
 
-  // Check for updates
+  // Setup BLE server
+  BleepingServer* server = bLib.getServer();
+  server->startServer();
+
+  // Enable management from BLE
   bLib.enableUpdater(OTA_APPNAME, OTA_VERSION);
-  if(bLib.getUpdater()->checkUpdateAvailable()) {
-    bLib.getUpdater()->doUpdate();
-  }
+  bLib.enableUpdateManager();
 
   /**
     Implement your code below!

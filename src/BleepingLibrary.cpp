@@ -38,13 +38,6 @@ BleepingServer* BleepingLibrary::getServer() {
   return this->server;
 }
 
-/**
-   Allows access to the BleepingUpdater object.
-*/
-BleepingUpdater* BleepingLibrary::getUpdater() {
-  return this->server->getUpdater();
-}
-
 String BleepingLibrary::getString(BleepingProperty prop) {
   return conf->getString(BleepingUUID(prop));
 }
@@ -69,4 +62,16 @@ boolean BleepingLibrary::beginSetup(int timeout, const char* name) {
   int timeEnd = millis() + timeout;
   while (millis() < timeEnd) {}
   return isConfigured();
+}
+
+void BleepingLibrary::enableUpdater(const char* app, int ver) {
+  updater = new BleepingUpdater(conf, app, ver);
+}
+
+void BleepingLibrary::enableUpdateManager() {
+  server->startFirmwareManagerService(updater);
+}
+
+BleepingUpdater* BleepingLibrary::getUpdater() {
+  return updater;
 }

@@ -34,11 +34,6 @@ void BleepingSystemCallback::onRead(BLECharacteristic* pCharacteristic) {
     return;
   }
 
-  if (key == BleepingUUID(BleepingSystem::HardwareSDK).toString().c_str()) {
-    pCharacteristic->setValue(ESP.getSdkVersion());
-    return;
-  }
-
   if (key == BleepingUUID(BleepingSystem::HardwareMAC).toString().c_str()) {
     pCharacteristic->setValue(WiFi.macAddress().c_str());
     return;

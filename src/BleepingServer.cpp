@@ -8,17 +8,13 @@
 
 BleepingServer::BleepingServer(BleepingConfig* conf) {
   this->conf = conf;
+
   this->deviceName = _BLib;
   this->customConfig = false;
-  this->bleepingUpdater = new BleepingUpdater(conf);
 }
 
 void BleepingServer::setDeviceName(const char* deviceName) {
   this->deviceName = deviceName;
-}
-
-BleepingUpdater* BleepingServer::getUpdater() {
-  return bleepingUpdater;
 }
 
 void BleepingServer::startServer() {
@@ -47,17 +43,8 @@ void BleepingServer::startServer() {
   pService = createService(BleepingUUID(BleepingSystem::HARDWARE), 12);
   createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareMAC), systemCallback);
   createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareUptime), systemCallback);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareSDK), systemCallback);
   createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareRestart), systemCallback);
   createCharacteristic(pService, BleepingUUID(BleepingSystem::HardwareReset), systemCallback);
-  pService->start();
-
-  // Firmware Update Service
-  pService = createService(BleepingUUID(BleepingSystem::UPDATE), 10);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdatePerform), bleepingUpdater);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdateCurrent), bleepingUpdater);
-  createCharacteristic(pService, BleepingUUID(BleepingSystem::UpdateLatest), bleepingUpdater);
-  createCharacteristic(pService, BleepingUUID(BleepingProperty::UpdateTarget), propertyCallback);
   pService->start();
 
   // Config Service
@@ -96,6 +83,17 @@ void BleepingServer::startCustomPropertyService(BleepingUUID props[], int numPro
     createCharacteristic(s, props[x], propertyCallback);
   }
 
+  s->start();
+}
+
+void BleepingServer::startFirmwareManagerService(BleepingUpdater* updater) {
+
+  // Firmware Update Service
+  BLEService* s = createService(BleepingUUID(BleepingSystem::FIRMWARE), 12);
+  createCharacteristic(s, BleepingUUID(BleepingSystem::FirmwareUpdate), updater);
+  createCharacteristic(s, BleepingUUID(BleepingSystem::FirmwareCurrent), updater);
+  createCharacteristic(s, BleepingUUID(BleepingSystem::FirmwareLatest), updater);
+  createCharacteristic(s, BleepingUUID(BleepingSystem::FirmwareSDK), updater);
   s->start();
 }
 

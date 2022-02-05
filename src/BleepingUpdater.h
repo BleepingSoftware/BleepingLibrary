@@ -21,9 +21,14 @@ class BleepingUpdater : public BLECharacteristicCallbacks {
   private:
     BleepingConfig* conf;
     WiFiClient client;
+    const char* app;
+    int ver;
+    String fetch(String url);
 
   public:
-    BleepingUpdater(BleepingConfig* conf);
+    BleepingUpdater(BleepingConfig* conf, const char* app, int ver);
+    boolean connect();
+    boolean checkUpdateAvailable();
     boolean doUpdate();
     boolean doUpdate(const char* target);
 

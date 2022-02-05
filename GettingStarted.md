@@ -6,9 +6,9 @@ The configuration characteristics which can be read / written by another BLE dev
 
 ## Example Sketches
 
-The following examples will start a BLE setup server allowing a user to configure WiFi credentials and more.
+Each of the following examples will show a different feature of the BleepingLibrary, many applications will use a combination of them all.
 
-### BleepingExample
+### BleepingWiFiExample
 
 The [BleepingWiFiProvision](examples/BleepingWiFiProvision/BleepingWiFiProvision.ino) example sketch will demonstrate:
 
@@ -18,15 +18,30 @@ The [BleepingWiFiProvision](examples/BleepingWiFiProvision/BleepingWiFiProvision
 
 On boot the device will check if it needs to be configured and optionally launch setup mode. Once the user has configured and rebooted the device, this example will connect to WiFi and then be ready to serve your application.
 
+### BleepingGPIO
+
+The [BleepingGPIO](examples/BleepingGPIO/BleepingGPIO.ino) example sketch will demonstrate:
+
+- Manuall starting the BLE setup server
+- Adding a custom service, characteristics, and a callback
+- Controlling a GPIO pin using BLE
+
 ### BleepingOTAUpdate
 
 The [BleepingOTAUpdate](examples/BleepingOTAUpdate/BleepingOTAUpdate.ino) example skecth will demonstrate:
 
-- Checking if a device is configured
-- Optionally launching setup mode
-- Using the BleepingUpdater to download new software
+- Check for updates
+- Download and install new firmware
 
 When booted, a configred device will download and install a new firmware image using either the target specified in setup, or the default target.
+
+### BleepingFirmwareManager
+
+The [BleepingFirmwareManager](examples/BleepingFirmwareManager/BleepingFirmwareManager.ino) example sketch will demonstrate:
+
+- Manually starting the BLE setup server
+- Enabling the Updater service
+- Managing the Firmware using BLE
 
 ### BleepingCustomConfig
 
@@ -53,11 +68,12 @@ When in configuration mode, the ESP32 will host a BLE server which can be config
 
 ### Device Control
 
-System parameters have a special callback which allow then to interact with the running system.
+System parameters have a special callback which allow then to interact with the running device.
 
 UUID|Parameter|Mode
 ---|---|---
 00000000-0000-beef-001f-320101000000|Device MAC|R
+00000000-0000-beef-001f-320401000000|Device Uptime|R
 00000000-0000-beef-001f-32F902000000|Restart Device|W
 00000000-0000-beef-001f-32FE02000000|Reset Device|W
 
