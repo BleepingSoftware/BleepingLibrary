@@ -26,6 +26,7 @@ class BleepingConfig {
     void formatAndReboot();
     int getBootCycles();
     String getString(BleepingUUID uuid);
+    String getString(BleepingUUID uuid, String defval);
     void putString(BleepingUUID uuid, const char* val);
 };
 

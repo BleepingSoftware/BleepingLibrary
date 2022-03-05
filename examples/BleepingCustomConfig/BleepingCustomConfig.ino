@@ -28,6 +28,7 @@ void setup() {
 
   // Setup BLE server
   BleepingServer* server = bLib.getServer();
+  server->setDeviceName("BleepingDevice");
   server->startServer();
 
   // Custom Config Parameters
@@ -41,8 +42,8 @@ void setup() {
 
   int timeout = millis() + (5 * 60 * 1000);
   while (millis() < timeout) {
-    String val = bLib.getConfig()->getString(myUUID_W);
-    ESP_LOGD(_BLib, "Got: %s", val.c_str());
+    String val = bLib.getConfig()->getString(myUUID_RW, "_default_");
+    ESP_LOGI(_BLib, "Got: %s", val.c_str());
     delay(1000);
   }
 

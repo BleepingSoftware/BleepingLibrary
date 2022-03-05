@@ -42,11 +42,20 @@ int BleepingConfig::getBootCycles() {
 }
 
 String BleepingConfig::getString(BleepingUUID uuid) {
+  return getString(uuid, "");
+}
+
+String BleepingConfig::getString(BleepingUUID uuid, String defVal) {
 
   String s2 = uuid.toString().substring(21, 30);
   const char* key = s2.c_str();
 
-  String val = conf->getString(key);
+  if(!conf->isKey(key)) {
+    putString(uuid, defVal.c_str());
+    return defVal;
+  }
+
+  String val = conf->getString(key, defVal);
   ESP_LOGD(_BLib, "Got [ %s :: %s ]", key, val.c_str());
   return val;
 }
