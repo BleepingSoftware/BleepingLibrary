@@ -43,7 +43,7 @@ String BleepingLibrary::getString(BleepingProperty prop) {
 }
 
 boolean BleepingLibrary::isConfigured() {
-  return getString(BleepingProperty::HardwareConfigured).toInt() > 0;
+  return conf->getString(BleepingProperty::HardwareConfigured, "0").toInt() > 0;
 }
 
 boolean BleepingLibrary::beginSetup(int timeout) {

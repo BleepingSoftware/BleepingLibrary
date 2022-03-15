@@ -41,9 +41,10 @@ void setup() {
 
   // Add Custom Service
   MyBleepingCallback* myCallback = new MyBleepingCallback();
-  BLEService* myService = server->createService(BleepingUUID("99999999-9999-9999-9999-999999999999"), 12);
-  server->createCharacteristic(myService, BleepingUUID("11111111-1111-1111-1111-111111111111"), myCallback);
-  server->createCharacteristic(myService, BleepingUUID("22222222-2222-2222-2222-222222222222"), myCallback);
+  BLEService* myService = server->createService(BleepingUUID("00000000-0000-beef-003f-000000000000"), 7);
+  server->createCharacteristic(myService, BleepingUUID("00000000-0000-beef-003f-000001000000"), myCallback);
+  server->createCharacteristic(myService, BleepingUUID("00000000-0000-beef-003f-000002000000"), myCallback);
+  server->createCharacteristic(myService, BleepingUUID("00000000-0000-beef-003f-000003000000"), myCallback);
   myService->start();
 
   /**

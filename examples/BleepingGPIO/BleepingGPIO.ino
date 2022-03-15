@@ -14,8 +14,8 @@
 
 BleepingLibrary bLib;
 
-BleepingUUID myGPIOService = BleepingUUID("00000000-0000-0000-002f-000000000000");
-BleepingUUID myGPIOPinState = BleepingUUID("00000000-0000-0000-002f-ff0003000000");
+BleepingUUID myGPIOService = BleepingUUID("00000000-0000-beef-003f-000000000000");
+BleepingUUID myGPIOPinState = BleepingUUID("00000000-0000-beef-003f-000003000000");
 
 class MyBleepingCallback: public BLECharacteristicCallbacks {
   void onRead(BLECharacteristic* characteristic) {
@@ -51,7 +51,7 @@ void setup() {
 
   // Add Custom Service
   MyBleepingCallback* myCallback = new MyBleepingCallback();
-  BLEService* myService = server->createService(myGPIOService, 4);
+  BLEService* myService = server->createService(myGPIOService, 3);
   server->createCharacteristic(myService, myGPIOPinState, myCallback);
   myService->start();
 

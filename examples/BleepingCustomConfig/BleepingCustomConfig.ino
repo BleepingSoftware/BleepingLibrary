@@ -14,9 +14,9 @@
 
 BleepingLibrary bLib;
 
-BleepingUUID myUUID_R = BleepingUUID("00000000-0000-0000-002f-ff0001000000");
-BleepingUUID myUUID_W = BleepingUUID("00000000-0000-0000-002f-ff0002000000");
-BleepingUUID myUUID_RW = BleepingUUID("00000000-0000-0000-002f-ff0003000000");
+BleepingUUID myUUID_R = BleepingUUID("00000000-0000-beef-002f-a00001000000");
+BleepingUUID myUUID_W = BleepingUUID("00000000-0000-beef-002f-a00002000000");
+BleepingUUID myUUID_RW = BleepingUUID("00000000-0000-beef-002f-a00003000000");
 
 BleepingUUID uuids[] = { myUUID_R, myUUID_W, myUUID_RW };
 
